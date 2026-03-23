@@ -92,6 +92,8 @@ builder.Services.AddOpenIddict()
 
         options.AllowAuthorizationCodeFlow();
         options.AllowClientCredentialsFlow();
+        options.AllowHybridFlow();
+        options.AllowImplicitFlow();
 
         options.RegisterScopes(Scopes.OpenId, Scopes.Email, Scopes.Profile);
         options.RegisterClaims(Claims.Email, Claims.GivenName, Claims.FamilyName, Claims.Role);
@@ -253,7 +255,14 @@ using (var scope = app.Services.CreateScope())
                 Permissions.Endpoints.EndSession,
 
                 Permissions.GrantTypes.AuthorizationCode,
+                Permissions.GrantTypes.Implicit,
                 Permissions.ResponseTypes.Code,
+                Permissions.ResponseTypes.CodeIdToken,
+                Permissions.ResponseTypes.CodeIdTokenToken,
+                Permissions.ResponseTypes.CodeToken,
+                Permissions.ResponseTypes.IdToken,
+                Permissions.ResponseTypes.IdTokenToken,
+                Permissions.ResponseTypes.Token,
 
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Email
