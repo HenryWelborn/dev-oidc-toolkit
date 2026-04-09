@@ -68,9 +68,17 @@ public class ConnectController(ILogger<ConnectController> logger,
 
         _logger.LogDebug("Found client application: {ClientId}", request.ClientId);
 
+        // Check if user requires consent
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            _logger.LogError("User details cannot be retrieved.");
+            throw new InvalidOperationException("The user details cannot be retrieved.");
+        }
+
         var consentType = await _applicationManager.GetConsentTypeAsync(app);
         var promptValues = request.GetPromptValues();
-        var needsConsent = consentType == ConsentTypes.Explicit || promptValues.Contains("consent");
+        var needsConsent = user.RequireConsent || consentType == ConsentTypes.Explicit || promptValues.Contains("consent");
 
         if (needsConsent)
         {
@@ -81,6 +89,7 @@ public class ConnectController(ILogger<ConnectController> logger,
             return View("Consent");
         }
 
+        _logger.LogDebug("Skipping consent for user {UserName} (RequireConsent={RequireConsent})", user.UserName, user.RequireConsent);
         return await ProcessAuthorizationRequest(request);
     }
 

@@ -18,4 +18,10 @@ public class DevOidcToolkitUser : IdentityUser
 {
     [Required] public required string FirstName { get; set; }
     [Required] public required string LastName { get; set; }
+    
+    /// <summary>
+    /// When true, requires explicit user consent on each authorization request.
+    /// When false, consent is implicit and the consent screen is skipped.
+    /// </summary>
+    public bool RequireConsent { get; set; } = false;
 }

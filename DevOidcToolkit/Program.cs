@@ -218,6 +218,7 @@ using (var scope = app.Services.CreateScope())
             FirstName = user.FirstName,
             LastName = user.LastName,
             EmailConfirmed = true,
+            RequireConsent = user.RequireConsent,
         };
         var result = await userManager.CreateAsync(userEntity);
 
@@ -267,7 +268,7 @@ using (var scope = app.Services.CreateScope())
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Email
             },
-            ConsentType = ConsentTypes.Explicit
+            ConsentType = ConsentTypes.Implicit
         };
         client.RedirectUris.ForEach(redirectUri => clientApp.RedirectUris.Add(new Uri(redirectUri)));
         client.PostLogoutRedirectUris.ForEach(redirectUri => clientApp.PostLogoutRedirectUris.Add(new Uri(redirectUri)));

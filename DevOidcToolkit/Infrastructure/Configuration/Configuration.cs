@@ -27,6 +27,13 @@ public class UserConfiguration
     [Required] public required string FirstName { get; set; }
     [Required] public required string LastName { get; set; }
     public List<string> Roles { get; set; } = [];
+    
+    /// <summary>
+    /// When true, requires explicit user consent on each authorization request.
+    /// When false, consent is implicit and the consent screen is skipped.
+    /// Defaults to false for development convenience.
+    /// </summary>
+    public bool RequireConsent { get; set; } = false;
 }
 
 public class ClientConfiguration
