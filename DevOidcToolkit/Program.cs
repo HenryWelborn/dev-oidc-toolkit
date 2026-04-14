@@ -254,6 +254,7 @@ using (var scope = app.Services.CreateScope())
                 Permissions.Endpoints.Authorization,
                 Permissions.Endpoints.Token,
                 Permissions.Endpoints.EndSession,
+                Permissions.Endpoints.Introspection,
 
                 Permissions.GrantTypes.AuthorizationCode,
                 Permissions.GrantTypes.Implicit,
