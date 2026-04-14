@@ -147,7 +147,7 @@ public class ConnectController(ILogger<ConnectController> logger,
         var principal = await _signInManager.CreateUserPrincipalAsync(user);
 
         principal.SetClaim(Claims.Subject, user.Id);
-        principal.SetClaim(Claims.Name, user.UserName);
+        principal.SetClaim(Claims.Name, user.FirstName + " " + user.LastName);
         principal.SetClaim(Claims.Email, user.Email);
         principal.SetClaim(Claims.GivenName, user.FirstName);
         principal.SetClaim(Claims.FamilyName, user.LastName);
