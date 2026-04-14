@@ -34,6 +34,7 @@ public class ClientsModel : PageModel
         public string ClientSecret { get; set; } = "";
         public string RedirectUris { get; set; } = "";
         public string PostLogoutRedirectUris { get; set; } = "";
+        public bool AllowRefreshTokenFlow { get; set; }
     }
 
     public async Task OnGetAsync()
@@ -90,6 +91,12 @@ public class ClientsModel : PageModel
                     OpenIddictConstants.Permissions.Scopes.Email
                 }
             };
+
+            if (Input.AllowRefreshTokenFlow)
+            {
+                clientApp.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.RefreshToken);
+                clientApp.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.Scope + OpenIddictConstants.Scopes.OfflineAccess);
+            }
 
             if (!string.IsNullOrWhiteSpace(Input.RedirectUris))
             {

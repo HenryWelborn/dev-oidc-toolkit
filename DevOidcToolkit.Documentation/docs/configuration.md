@@ -499,6 +499,7 @@ In-memory database (default, no persistence):
                 "Id": "test",
                 "Secret": "ThisIsNotARealSecret",
                 "RequireConsent": false,
+                "AllowRefreshTokenFlow": true,
                 "RedirectUris": [
                     "http://localhost:3000/callback"
                 ]
@@ -529,6 +530,7 @@ SQLite database (data persists across restarts):
                 "Id": "test",
                 "Secret": "ThisIsNotARealSecret",
                 "RequireConsent": false,
+                "AllowRefreshTokenFlow": true,
                 "RedirectUris": [
                     "http://localhost:3000/callback"
                 ]

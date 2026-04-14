@@ -94,8 +94,9 @@ builder.Services.AddOpenIddict()
         options.AllowClientCredentialsFlow();
         options.AllowHybridFlow();
         options.AllowImplicitFlow();
+        options.AllowRefreshTokenFlow();
 
-        options.RegisterScopes(Scopes.OpenId, Scopes.Email, Scopes.Profile);
+        options.RegisterScopes(Scopes.OpenId, Scopes.Email, Scopes.Profile, Scopes.OfflineAccess);
         options.RegisterClaims(Claims.Email, Claims.GivenName, Claims.FamilyName, Claims.Role);
 
         if (config.Issuer is not null)
@@ -267,8 +268,14 @@ using (var scope = app.Services.CreateScope())
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Email
             },
-            ConsentType = ConsentTypes.Implicit
+            ConsentType = client.RequireConsent ? ConsentTypes.Explicit : ConsentTypes.Implicit
         };
+
+        if (client.AllowRefreshTokenFlow)
+        {
+            clientApp.Permissions.Add(Permissions.GrantTypes.RefreshToken);
+            clientApp.Permissions.Add(Permissions.Prefixes.Scope + Scopes.OfflineAccess);
+        }
         client.RedirectUris.ForEach(redirectUri => clientApp.RedirectUris.Add(new Uri(redirectUri)));
         client.PostLogoutRedirectUris.ForEach(redirectUri => clientApp.PostLogoutRedirectUris.Add(new Uri(redirectUri)));
         await openIddictManager.CreateAsync(clientApp);

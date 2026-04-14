@@ -41,6 +41,12 @@ public class ClientConfiguration
     /// </summary>
     public bool RequireConsent { get; set; } = false;
 
+    /// <summary>
+    /// When true, enables the refresh token grant and offline_access scope for the client.
+    /// Defaults to false.
+    /// </summary>
+    public bool AllowRefreshTokenFlow { get; set; } = false;
+
     public List<string> RedirectUris { get; set; } = [];
     public List<string> PostLogoutRedirectUris { get; set; } = [];
 }
