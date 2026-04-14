@@ -27,19 +27,19 @@ public class UserConfiguration
     [Required] public required string FirstName { get; set; }
     [Required] public required string LastName { get; set; }
     public List<string> Roles { get; set; } = [];
-    
-    /// <summary>
-    /// When true, requires explicit user consent on each authorization request.
-    /// When false, consent is implicit and the consent screen is skipped.
-    /// Defaults to false for development convenience.
-    /// </summary>
-    public bool RequireConsent { get; set; } = false;
 }
 
 public class ClientConfiguration
 {
     [Required] public required string Id { get; set; }
     [Required] public required string Secret { get; set; }
+
+    /// <summary>
+    /// When true, requires explicit user consent for this client on each authorization request.
+    /// When false, consent is implicit unless otherwise requested by the authorization prompt.
+    /// Defaults to false for development convenience.
+    /// </summary>
+    public bool RequireConsent { get; set; } = false;
 
     public List<string> RedirectUris { get; set; } = [];
     public List<string> PostLogoutRedirectUris { get; set; } = [];

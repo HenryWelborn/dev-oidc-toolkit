@@ -218,7 +218,6 @@ using (var scope = app.Services.CreateScope())
             FirstName = user.FirstName,
             LastName = user.LastName,
             EmailConfirmed = true,
-            RequireConsent = user.RequireConsent,
         };
         var result = await userManager.CreateAsync(userEntity);
 

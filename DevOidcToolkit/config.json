@@ -13,6 +13,7 @@
       {
         "Id": "client",
         "Secret": "secret",
+        "RequireConsent": false,
         "RedirectUris": [
           "http://localhost:3000/signin-oidc"
         ],

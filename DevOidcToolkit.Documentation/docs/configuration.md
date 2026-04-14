@@ -126,12 +126,6 @@ This is a list of all of the environment variables that can be used to configure
             <td>None</td>
         </tr>
         <tr>
-            <td>DevOidcToolkit__Users__INDEX__RequireConsent</td>
-            <td>Whether the user must explicitly consent on each authorization request. When false, consent is implicit and the consent screen is skipped.</td>
-            <td>false</td>
-            <td>false</td>
-        </tr>
-        <tr>
             <td>DevOidcToolkit__Clients__INDEX__Id</td>
             <td>The ID of the client.</td>
             <td>client</td>
@@ -437,13 +431,6 @@ use a SQLite database instead, which persists data between restarts.
             <td>User</td>
             <td>None</td>
         </tr>
-        <tr>
-            <td>RequireConsent</td>
-            <td>bool</td>
-            <td>Whether the user must explicitly consent on each authorization request. When false, consent is implicit and the consent screen is skipped. This is useful for development to avoid repeatedly clicking through the consent screen.</td>
-            <td>false</td>
-            <td>false</td>
-        </tr>
     </tbody>
 </table>
 
@@ -504,14 +491,14 @@ In-memory database (default, no persistence):
             {
                 "Email": "sudo@localhost",
                 "FirstName": "Test",
-                "LastName": "User",
-                "RequireConsent": false
+                "LastName": "User"
             }
         ],
         "Clients": [
             {
                 "Id": "test",
                 "Secret": "ThisIsNotARealSecret",
+                "RequireConsent": false,
                 "RedirectUris": [
                     "http://localhost:3000/callback"
                 ]
@@ -534,14 +521,14 @@ SQLite database (data persists across restarts):
             {
                 "Email": "sudo@localhost",
                 "FirstName": "Test",
-                "LastName": "User",
-                "RequireConsent": false
+                "LastName": "User"
             }
         ],
         "Clients": [
             {
                 "Id": "test",
                 "Secret": "ThisIsNotARealSecret",
+                "RequireConsent": false,
                 "RedirectUris": [
                     "http://localhost:3000/callback"
                 ]

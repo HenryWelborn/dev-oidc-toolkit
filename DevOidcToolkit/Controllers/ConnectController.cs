@@ -78,7 +78,7 @@ public class ConnectController(ILogger<ConnectController> logger,
 
         var consentType = await _applicationManager.GetConsentTypeAsync(app);
         var promptValues = request.GetPromptValues();
-        var needsConsent = user.RequireConsent || consentType == ConsentTypes.Explicit || promptValues.Contains("consent");
+        var needsConsent = consentType == ConsentTypes.Explicit || promptValues.Contains("consent");
 
         if (needsConsent)
         {
@@ -89,7 +89,7 @@ public class ConnectController(ILogger<ConnectController> logger,
             return View("Consent");
         }
 
-        _logger.LogDebug("Skipping consent for user {UserName} (RequireConsent={RequireConsent})", user.UserName, user.RequireConsent);
+        _logger.LogDebug("Skipping consent for user {UserName}", user.UserName);
         return await ProcessAuthorizationRequest(request);
     }
 
