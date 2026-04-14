@@ -7,11 +7,17 @@
 }
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
-    <div class="form-signin w-100" style="max-width: 330px;">
-        <form id="login" method="post">
+    <div class="row w-100 justify-content-center">
+        <div class="col-md-4">
             <i class="bi bi-shield-lock-fill text-primary mb-4" style="font-size: 4rem;"></i>
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+            <small class="text-body-secondary">
+                Don't have an account? <a href="/users">Create an ID.</a>
+            </small>
+        </div>
+        <div class="col-md-4">
+            <div class="form-signin w-100">
+        <form id="login" method="post">
             @if (!ViewData.ModelState.IsValid)
             {
                 <div class="alert alert-danger" role="alert">
@@ -19,9 +25,12 @@
                 </div>
             }
 
-            <div class="form-floating"> 
-                <input asp-for="Input.Email" type="email" class="form-control" id="email">
-                <label for="floatingInput">Email address</label>
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Email" asp-items="Model.UserEmails" id="email" class="form-select">
+                    <option value=""></option>
+                </select>
+                <label for="email">Email address</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
             <div class="form-check text-start my-3">
@@ -33,6 +42,8 @@
 
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
         </form>
+            </div>
+        </div>
     </div>
 </div>
 
