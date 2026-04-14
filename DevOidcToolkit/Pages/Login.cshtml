@@ -6,26 +6,43 @@
     Layout = "_Layout";
 }
 
-<h1>Log In</h1>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="form-signin w-100" style="max-width: 330px;">
+        <form id="login" method="post">
+            <i class="bi bi-shield-lock-fill text-primary mb-4" style="font-size: 4rem;"></i>
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-<form id="login" method="post">
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div>
-            @Html.ValidationSummary()
-        </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Html.ValidationSummary(false, "", new { @class = "mb-0" })
+                </div>
+            }
+
+            <div class="form-floating"> 
+                <input asp-for="Input.Email" type="email" class="form-control" id="email">
+                <label for="floatingInput">Email address</label>
+            </div>
+
+            <div class="form-check text-start my-3">
+                <input asp-for="Input.RememberMe" type="checkbox" class="form-check-input" id="remember-me" />
+                <label class="form-check-label" for="remember-me">
+                    Remember me
+                </label>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .form-signin {
+        max-width: 330px;
+        padding: 1rem;
     }
 
-    <label for="email">Select User</label>
-    <select asp-for="Input.Email" asp-items="Model.UserEmails" id="email">
-        <option value="">-- Select User Email --</option>
-    </select>
-    <span asp-validation-for="Input.Email"></span>
-
-    <label for="remember-me">
-        <input asp-for="Input.RememberMe" type="checkbox" id="remember-me" />
-        Remember me
-    </label>
-
-    <button type="submit">Log In</button>
-</form>
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+</style>
