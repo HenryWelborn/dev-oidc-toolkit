@@ -289,6 +289,38 @@ app.UseRouting();
 
 app.UseSession();
 
+// Middleware to remove scope parameter from token requests to avoid OpenIddict validation error
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/connect/token" && context.Request.Method == "POST")
+    {
+        context.Request.EnableBuffering();
+        
+        var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
+        context.Request.Body.Position = 0;
+        
+        // Remove scope parameter from the request body
+        if (body.Contains("scope="))
+        {
+            var parameters = body.Split('&')
+                .Where(p => !p.StartsWith("scope="))
+                .ToArray();
+            
+            var newBody = string.Join("&", parameters);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(newBody);
+            
+            context.Request.Body = new MemoryStream(bytes);
+            context.Request.ContentLength = bytes.Length;
+        }
+        else
+        {
+            context.Request.Body.Position = 0;
+        }
+    }
+    
+    await next();
+});
+
 app.UseCors();
 app.UseStaticFiles();
 
