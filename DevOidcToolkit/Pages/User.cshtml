@@ -1,16 +1,36 @@
 @page "/user"
 @using Microsoft.AspNetCore.Authorization;
+@using DevOidcToolkit.Infrastructure.Configuration
+@inject DevOidcToolkitConfiguration Config
 @attribute [Authorize]
 @{
     Layout = "_Layout";
     ViewData["Title"] = "User Profile";
 }
 
-<div class="container my-5"> 
-<nav aria-label="breadcrumb">
- <ol class="breadcrumb p-3 bg-body-tertiary rounded-3"> 
- <li class="breadcrumb-item"><a href="/">Home</a></li>
- </ol> </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">@Config.ApplicationTitle</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clients">Clients</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
 <div class="p-5 text-center bg-body-tertiary rounded-3">
 <i class="bi bi-person-square text-primary mb-4" style="font-size: 4rem;"></i>
 <h1 class="text-body-emphasis">User Profile</h1> 

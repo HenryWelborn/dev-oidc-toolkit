@@ -2,6 +2,8 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.EntityFrameworkCore
 @using System.Text.Json
+@using DevOidcToolkit.Infrastructure.Configuration
+@inject DevOidcToolkitConfiguration Config
 @model DevOidcToolkit.Pages.UsersModel
 @inject UserManager<DevOidcToolkitUser> UserManager
 @{
@@ -9,11 +11,29 @@
     ViewData["Title"] = "Users";
 }
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">@Config.ApplicationTitle</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/users">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clients">Clients</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container my-5"> 
-<nav aria-label="breadcrumb">
- <ol class="breadcrumb p-3 bg-body-tertiary rounded-3"> 
- <li class="breadcrumb-item"><a href="/">Home</a></li>
- </ol> </nav>
 
 @if (!string.IsNullOrEmpty(Model.SuccessMessage))
 {
