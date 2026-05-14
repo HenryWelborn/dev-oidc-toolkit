@@ -60,6 +60,12 @@ This is a list of all of the environment variables that can be used to configure
             <td>None (derived from request URL)</td>
         </tr>
         <tr>
+            <td>DevOidcToolkit__ApplicationTitle</td>
+            <td>The application title displayed in browser tabs and page titles.</td>
+            <td>My Custom OIDC Server</td>
+            <td>Dev OIDC Toolkit</td>
+        </tr>
+        <tr>
             <td>DevOidcToolkit__Database__SqliteFile</td>
             <td>The path to the SQLite database file. When set, data is persisted to this file and survives restarts. When not set, an in-memory database is used and all data is lost on restart.</td>
             <td>/data/dev-oidc-toolkit.db</td>
@@ -209,6 +215,13 @@ details](#example-json-configuration)).
             <td>Override the issuer URL embedded in tokens and the OIDC discovery document. Useful for testing clients that validate the <code>iss</code> claim. When not set, the issuer is derived from the incoming request URL.</td>
             <td>https://fake-issuer.example.com</td>
             <td>None</td>
+        </tr>
+        <tr>
+            <td>ApplicationTitle</td>
+            <td>string</td>
+            <td>The application title displayed in browser tabs and page titles.</td>
+            <td>My Custom OIDC Server</td>
+            <td>Dev OIDC Toolkit</td>
         </tr>
         <tr>
             <td>Database</td>
@@ -487,6 +500,7 @@ In-memory database (default, no persistence):
     "DevOidcToolkit": {
         "Port": 8080,
         "Issuer": "https://fake-issuer.example.com",
+        "ApplicationTitle": "My Custom OIDC Server",
         "Users": [
             {
                 "Email": "sudo@localhost",
@@ -515,6 +529,7 @@ SQLite database (data persists across restarts):
 {
     "DevOidcToolkit": {
         "Port": 8080,
+        "ApplicationTitle": "My Custom OIDC Server",
         "Database": {
             "SqliteFile": "/data/dev-oidc-toolkit.db"
         },

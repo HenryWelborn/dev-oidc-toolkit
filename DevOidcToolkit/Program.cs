@@ -23,6 +23,10 @@ builder.Configuration.AddEnvironmentVariables();
 var configSection = builder.Configuration.GetSection(DevOidcToolkitConfiguration.Position);
 var config = configSection.Get<DevOidcToolkitConfiguration>() ?? new DevOidcToolkitConfiguration();
 
+// Register configuration for dependency injection
+builder.Services.Configure<DevOidcToolkitConfiguration>(configSection);
+builder.Services.AddSingleton(config);
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();

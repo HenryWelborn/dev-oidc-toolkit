@@ -1,12 +1,14 @@
 @page
+@using DevOidcToolkit.Infrastructure.Configuration
+@inject DevOidcToolkitConfiguration Config
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Dev OIDC Toolkit";
+    ViewData["Title"] = "Home";
 }
 
 <div class="container my-5">
     <div class="p-5 text-center bg-body-tertiary rounded-3">
-    <h1 class="text-body-emphasis">Welcome to Dev OIDC Toolkit</h1>
+    <h1 class="text-body-emphasis">Welcome to @Config.ApplicationTitle</h1>
     <p class="col-lg-6 mx-auto mb-4">A simple OpenID Connect identity provider for development and testing.</p>
     </div>
     <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center"> 
